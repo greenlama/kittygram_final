@@ -14,6 +14,8 @@ services:
   backend:
     image: greenlama/kittygram_backend
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static:/backend_static
       - media:/app/media
@@ -26,6 +28,9 @@ services:
   gateway:
     image: greenlama/kittygram_gateway
     env_file: .env
+    depends_on:
+      - backend
+      - frontend
     volumes:
       - static:/staticfiles/
       - media:/media
